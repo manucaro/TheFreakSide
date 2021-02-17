@@ -1,0 +1,179 @@
+﻿@model TheFreakSide.Models.Order;
+
+@{ 
+    ViewData["Title"] = "Pedido";
+    var product = ViewData["Product"] as Product;
+
+}
+
+<div class="alert alert-primary" role="alert">
+    <h3>@ViewData["Title"]</h3>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Tu pedido</span>
+            <span class="badge bg-primary rounded-pill text-white">1</span>
+        </h4>
+        <ul class="list-group mb-3">
+            <li class="list-group-item text-center border-primary">
+                <img class="card-img-top" src="@product.ImageURL" />
+                @if (product.StockQuantity <= 10 && product.StockQuantity > 0)
+                {
+                    <p class="text-danger">Últimas unidades</p>
+                }
+            </li>
+            <li class="list-group-item d-flex justify-content-between border-bottom border-primary">
+                <h6 class="my-0">@product.Name</h6>
+                <span class="text-muted">@product.Price €</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-primary">
+                <span class="text-white">Precio Total (+IVA)</span>
+                <strong class="text-white">@ViewBag.IVA €</strong>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Dirección</h4>
+        @using (Html.BeginForm("Index", "Orders", FormMethod.Post))
+        {
+            <div class="row g-3">
+                <div class="col-sm-6 mb-4">
+                    @Html.LabelFor(Model => Model.FirstName, "Nombre")
+                    @Html.EditorFor(Model => Model.FirstName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    <div class="invalid-feedback">
+                        Introduce tu nombre
+                    </div>
+                </div>
+
+                <div class="col-sm-6 mb-4">
+                    @Html.LabelFor(Model => Model.LastName, "Apellidos")
+                    @Html.EditorFor(Model => Model.LastName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    <div class="invalid-feedback">
+                        Introduce tus apellidos
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    @Html.LabelFor(Model => Model.Email)
+                    @Html.EditorFor(Model => Model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email", @required = "required" } })
+                    <div class="invalid-feedback">
+                        Introduce tu correo para las actualizaciones del envío
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    @Html.LabelFor(Model => Model.Address, "Dirección")
+                    @Html.EditorFor(Model => Model.Address, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    <div class="invalid-feedback">
+                        Introduce tu dirección de envio
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    @Html.LabelFor(Model => Model.PhoneNumber, "Número de teléfono")
+                    @Html.EditorFor(Model => Model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    <div class="invalid-feedback">
+                        Introduce tu número de teléfono para las actualizaciones del envío
+                    </div>
+                </div>
+
+                <div class="col-sm-6 mb-4">
+                    @Html.LabelFor(Model => Model.City, "Ciudad")
+                    @Html.EditorFor(Model => Model.City, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    <div class="invalid-feedback">
+                        Introduce una ciudad
+                    </div>
+                </div>
+
+                <div class="col-sm-6 mb-4">
+                    @Html.LabelFor(Model => Model.Postcode, "Código Postal")
+                    @Html.EditorFor(Model => Model.Postcode, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    <div class="invalid-feedback">
+                        Introduce un código postal
+                    </div>
+                </div>
+            </div>
+
+
+            <hr class="my-4 bg-primary">
+
+            <h4 class="mb-3">Pago</h4>
+
+            <div class="my-3">
+                <div class="form-check">
+                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input" value="credit" checked required>
+                    <label class="form-check-label" for="credit">Tarjeta de crédito / débito</label>
+                </div>
+                <div class="form-check">
+                    <input id="bankTransfer" name="paymentMethod" type="radio" class="form-check-input" value="bankTransfer" required>
+                    <label class="form-check-label" for="debit">Transferencia Bancaria</label>
+                </div>
+                <div class="form-check">
+                    <input id="cash" name="paymentMethod" type="radio" class="form-check-input" value="cash" required>
+                    <label class="form-check-label" for="debit">Contra-reembolso</label>
+                </div>
+            </div>
+
+            <div class="alert alert-warning" role="alert" id="bankTransfer-form">
+                <span>El pago será a la siguiente cuenta <strong>ESXX - XXXX - XXXX - XX - XXXXXXXXXX</strong></span>
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="cash-form">
+                <span>El pago no se hará hasta que llegue a la dirección pero tendrá que <strong>pagar un suplemento de 5 €</strong></span>
+            </div>
+
+            <div class="row gy-3" id="credit-form">
+                <div class="col-md-6 mb-4">
+                    <label for="cc-name" class="form-label">Nombre del titular</label>
+                    <input type="text" class="form-control" id="cc-name" placeholder="">
+                    <div class="invalid-feedback">
+                        Introduce el nombre del titular
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label for="cc-number" class="form-label">Número de la tarjeta</label>
+                    <input type="text" class="form-control" id="cc-number" placeholder="">
+                    <div class="invalid-feedback">
+                        Introduce el número de la tarjeta de crédito
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <label for="cc-expiration" class="form-label">Fecha Expiración</label>
+                    <input type="text" class="form-control" id="cc-expiration" placeholder="">
+                    <div class="invalid-feedback">
+                        Introduce la fecha de expiración
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <label for="cc-cvv" class="form-label">CVV</label>
+                    <input type="text" class="form-control" id="cc-cvv" placeholder="">
+                    <div class="invalid-feedback">
+                        Introduce el código de seguridad
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4 bg-primary">
+
+            <div class="d-flex justify-content-between my-4">
+                <a class="btn btn-danger w-25" asp-area="" asp-controller="Products" asp-action="Index">Cancelar</a>
+
+                @if (product.StockQuantity != 0)
+                {
+                    <button class="btn btn-primary w-25" type="submit">Confirmar pedido</button>
+                }
+
+                @if (product.StockQuantity == 0)
+                {
+                    <button class="btn btn-secondary w-25" disabled>No disponible</button>
+                }
+
+            </div>
+        }
+    </div>
+</div>

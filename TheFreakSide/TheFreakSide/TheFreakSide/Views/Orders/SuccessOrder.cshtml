@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Productos";
+    var product = ViewData["Product"] as Product;
+    var order = ViewData["Order"] as Order;
+}
+
+<div class="alert alert-success" role="alert">
+    El pedido se ha realizado correctamente
+</div>
+
+<ul class="list-group mt-4">
+    <li class="list-group-item d-flex justify-content-center border-primary">
+        <img class="card-img-top" src="@product.ImageURL" />
+    </li>
+    <li class="list-group-item d-flex justify-content-center border-primary">
+        <span class="col-sm font-weight-bold text-center">Nombre del producto: @product.Name</span>
+        <span class="col-sm font-weight-bold text-center">Precio total: @order.TotalPrice €</span>
+        <span class="col-sm font-weight-bold text-center">Número de pedido: @ViewBag.IDOrder</span>
+    </li>
+</ul>
+
