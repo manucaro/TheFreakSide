@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheFreakSide", "TheFreakSide\TheFreakSide.csproj", "{67D7F0C5-8B95-4572-8C09-BBB3B5B783C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67D7F0C5-8B95-4572-8C09-BBB3B5B783C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D7F0C5-8B95-4572-8C09-BBB3B5B783C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D7F0C5-8B95-4572-8C09-BBB3B5B783C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D7F0C5-8B95-4572-8C09-BBB3B5B783C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {808C5635-355A-4372-89A2-2C7ED6501A7B}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/2020-dwm-polis
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TheFreakSide\\TheFreakSide.csproj
+		SccProjectName1 = TheFreakSide
+		SccLocalPath1 = TheFreakSide
+	EndGlobalSection
+EndGlobal
