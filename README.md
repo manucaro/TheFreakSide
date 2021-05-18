@@ -1,5 +1,5 @@
 # TheFreakSide
-Proyecto desarrollado con ASP Core 3.1 y EntityFramework junto a @carmenesther y @jo4nymj para la asignatura de Desarrollo Web/Móvil del Máster TAII de la UAL.
+Proyecto desarrollado con ASP Core 3.1 y EntityFramework por @carmenesther, @jo4nymj y @manucaro para la asignatura de Desarrollo Web/Móvil del Máster TAII de la UAL.
 
 ### Página principal
 
